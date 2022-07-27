@@ -52,8 +52,7 @@ Visualization and statistical functions for post analysis.
 * environment.yml  
 Environmental requirement
 
-## Content
-Common Variables:
+## Common Variables
 
     "n_players": number of players, usually 5
     "min_bid": minimal bid value, usually 0.2
@@ -77,6 +76,9 @@ Common Variables:
     "grid_ls": grid list, e.g. list(np.linspace(.2, 5, 25, endpoint=True)) for 25 actions
     "index": 0 for bidder value 5, 4 for bidder value 1.
 }
+
+## Pre-trained Models and Result
+https://bocconi-my.sharepoint.com/:f:/g/personal/qitian_ma_studbocconi_it/EmupCT-80WNBgAnQRFD8AzsBxlRQEEJRixFFcV2LtCRLOA?e=YXzAX2
 
 ## Acknowledgments
 
