@@ -7,21 +7,6 @@ import os
 from pathlib import Path
 import json
 
-
-# n_bidders = 5
-# mat_ls = [torch.load('/home/3068020/GameTheory/q_learning_paper/q_larker/qDiscrete/'  + "averageQmat" + str(i) + ".pt") for i in range(5)]
-# Qvalue_ls = [mat[0, 0, 0, 0, 0, ...].numpy() for mat in mat_ls]
-# Qvalue_ls = np.array(Qvalue_ls)
-
-
-# assert (Pmat[:, -1] != np.tile(grid_ls, int(Pmat.shape[0] / Qvalue_ls[0].shape[0]))).sum() == 0
-# y_0 = np.tile(Qvalue_ls[0], int(Pmat.shape[0] / Qvalue_ls[0].shape[0])) # max value
-# y_1 = np.tile(Qvalue_ls[1], int(Pmat.shape[0] / Qvalue_ls[0].shape[0]))
-# y_2 = np.tile(Qvalue_ls[2], int(Pmat.shape[0] / Qvalue_ls[0].shape[0]))
-# y_3 = np.tile(Qvalue_ls[3], int(Pmat.shape[0] / Qvalue_ls[0].shape[0]))
-# y_4 = np.tile(Qvalue_ls[4], int(Pmat.shape[0] / Qvalue_ls[0].shape[0]))
-# y_ls = [y_0, y_1, y_2, y_3, y_4]
-
 def saveQmat(index):
     path = '../qDiscrete/' 
     mat = torch.load(path + "averageQmat" + str(index) + ".pt")
