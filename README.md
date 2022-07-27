@@ -1,13 +1,7 @@
 ## About The Project
 
-In the discrete-action case of a multi-agent auction setting, Calvano Initialization was at-
-tempted with success. This project seeks to showcase its counterpart in the continuous-
-action setting. As the algorithm applied in the discrete case is Q-learning with Q-function
-in the matrix form, the counterpart in the continuous case is naturally Deep Deterministic
-Policy Gradient. In continuous case, without pre-train, within limited steps of exploration
-(10K), we observe that the agents are able to figure out the order on average, but not the
-Nash Equilibrium, especially for individual runs. In this case, Calvano Initialization will
-help agents to converge faster and reach Nash Equilibrium
+In the discrete-action case of a multi-agent auction setting, Calvano Initialization was attempted with success. This project seeks to showcase its counterpart in the continuous-action setting. As the algorithm applied in the discrete case is Q-learning with Q-function
+in the matrix form, the counterpart in the continuous case is naturally Deep Deterministic Policy Gradient. In continuous case, without pre-train, within limited steps of exploration (10K), we observe that the agents are able to figure out the order on average, but not the Nash Equilibrium, especially for individual runs. In this case, Calvano Initialization will help agents to converge faster and reach Nash Equilibrium.
 
 
 <!-- GETTING STARTED -->
@@ -30,7 +24,8 @@ The code is based on classical ddpg algorithm with modifications and initializat
 
 * auctionContinuous_env.py  
 Continuous action environment
-*   ddpg_experiment_init.py  
+
+* ddpg_experiment_init.py  
 ddpg with initialization
 
 * ddpg_experiment.py
@@ -58,9 +53,9 @@ Visualization and statistical functions for post analysis.
 Environmental requirement
 
 ## Content
-Common variables:
+Common Variables:
 
-    "n_players": number of players, usually 5.
+    "n_players": number of players, usually 5
     "min_bid": minimal bid value, usually 0.2
     "max_bid": maximal bid value, usually 5 if not constrained
     "delta": discounted factor for accumulated reward
@@ -71,7 +66,7 @@ Common variables:
     "batch_size": number of training experiences fecthed from memory buffer
     "epoch": number of runs
     "valuations_ls": valuations of bidders, usually (5., 4., 3., 2., 1.)
-    "clickRates_ls": click rates of ad slots, usually (20, 10, 5, 2, 0),
+    "clickRates_ls": click rates of ad slots, usually (20, 10, 5, 2, 0)
     "save_to": directory to which the result is saved
     "hidden1_actor": first hidden layer of actor neural netowrk
     "hidden2_actor": second hidden layer of actor neural netowrk
