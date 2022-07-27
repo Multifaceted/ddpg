@@ -77,7 +77,7 @@ Environmental requirement
     "index": 0 for bidder value 5, 4 for bidder value 1.
 }
 
-## Pre-trained Models and Result
+## Pre-trained Models, Qmat and Result
 https://bocconi-my.sharepoint.com/:f:/g/personal/qitian_ma_studbocconi_it/EuIaCYHnn4JCo0beGaSHhzIB6VZKP1xE2HbucCVb1qKVYw?e=h6VxoO
 
 ## Acknowledgments
