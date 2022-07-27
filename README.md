@@ -78,7 +78,7 @@ Environmental requirement
 }
 
 ## Pre-trained Models and Result
-https://bocconi-my.sharepoint.com/:f:/g/personal/qitian_ma_studbocconi_it/EmupCT-80WNBgAnQRFD8AzsBxlRQEEJRixFFcV2LtCRLOA?e=YXzAX2
+https://bocconi-my.sharepoint.com/:f:/g/personal/qitian_ma_studbocconi_it/EuIaCYHnn4JCo0beGaSHhzIB6VZKP1xE2HbucCVb1qKVYw?e=h6VxoO
 
 ## Acknowledgments
 
