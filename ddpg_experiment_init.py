@@ -20,6 +20,9 @@ import time
 from DDPGvanilla_gpu import Actor
 
 def mkDir(save_to):
+    """
+    Auxiliary function for making directory
+    """
     from pathlib import Path
     import os
     
@@ -27,6 +30,9 @@ def mkDir(save_to):
 
 
 def save_result(bidders_ls, dir_name="default"):
+    """
+    Auxiliary function for saving bidder memory (experience).
+    """
     import os
     import pickle
     from pathlib import Path
@@ -74,7 +80,7 @@ def run_experiment(params, epoch, device, bidders_ls=None, reset=False, override
                          seed=None,
                          device=device
                          )
-    if override_ls is None:
+    if override_ls is None: # overriding bidder's choice.
         override_ls = [None] * params["n_players"]
         
     [bidder.cache.append([]) for bidder in bidders_ls]
@@ -113,6 +119,9 @@ def run_experiment(params, epoch, device, bidders_ls=None, reset=False, override
     return bidders_ls
 
 class ExperimentThread(threading.Thread):
+    """
+    Multi-thread
+    """
     def __init__(self, threadID, maxThread, **kwargs):
       threading.Thread.__init__(self)
       self.threadID = threadID
@@ -151,7 +160,9 @@ def run_experimentMultiple(params, maxThread, override_ls=None):
     #                 hidden2_critic=params["hidden2_critic"],
     #                 constrain=params["constrain"],
     #                 device=device) for i in range(params["n_players"])]
-    
+    """
+    Run parallely experiment.
+    """
     for epoch in range(params["epoch"]):
         # bidders_ls = run_experiment(params, bidders_ls, override_ls=override_ls, reset=True)
         ExperimentThread(threadID=epoch, maxThread=maxThread, params=params, epoch=epoch, device=devices_ls[epoch%(n_devices-1)+1] if n_devices>0 else "cpu", override_ls=override_ls).start()
@@ -161,6 +172,9 @@ def run_experimentMultiple(params, maxThread, override_ls=None):
     
     # save_result(bidders_ls, dir_name=params["save_to"])
 def fetch_results(bidders_ls):
+    """
+    Fetch actions and rewards from bidder list.
+    """
     import numpy as np
 
     actions_mat = [[ [data[1].item() for data in epoch_data] for epoch_data in bidder.memory.container.values()] for bidder in bidders_ls]
@@ -172,6 +186,9 @@ def fetch_results(bidders_ls):
     return np.swapaxes(np.array(actions_mat), 0, 1), np.swapaxes(np.array(rewards_mat), 0, 1)
 
 def saveMatrix(bidders_ls, save_to):
+    """
+    Auxiliary function to save actions and rewards result.
+    """
     import pandas as pd
     import os
     import json
@@ -189,6 +206,10 @@ def saveMatrix(bidders_ls, save_to):
     json.dump(params, open(os.path.join(save_to, "Params.json"), "w"), sort_keys=True, indent=4)
 
 def saveDDPG(bidders_ls, indexes_ls=[0, 1, 2, 3, 4], experimentName="defaultExperiment"):
+    """
+    Auxiliary function to save bidder and params.
+    """
+    
     import pickle
     import os
     import json
@@ -236,7 +257,7 @@ if __name__ == '__main__':
         "base": 1.01,
         "maxThread": 9,
         "dynamic_explore": True
-    }
+    } # This is to avoid param being changed at one of the thread, since dictionary is passed by reference, not by value. So the origin copy is named params.
     n_devices = torch.cuda.device_count()
     if n_devices == 0:
         devices_ls = ["cpu"]
