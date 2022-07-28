@@ -46,7 +46,9 @@ def save_result(bidders_ls, dir_name="default"):
             pickle.dump(bidder.memory, f)
             
 def run_experiment(params, epoch, device, bidders_ls=None, reset=False, override_ls=None):
-
+    """
+    Run as single experiment. If bidder list is none, initialize a list.
+    """
     writer = SummaryWriter(log_dir=os.path.join(params["save_to"], "TensorboadEpoch"+str(epoch)))
     if bidders_ls is None:
         bidders_ls = [DDPG(index=i, 

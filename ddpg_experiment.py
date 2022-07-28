@@ -86,6 +86,9 @@ def save_result(bidders_ls, dir_name="default"):
             pickle.dump(bidder.memory, f)
             
 def run_experiment(params, epoch, device, bidders_ls=None, reset=True, override_ls=None):
+    """
+    Run as single experiment. If bidder list is none, initialize a list.
+    """
     writer = SummaryWriter(log_dir=os.path.join(params["save_to"], "TensorboadEpoch"+str(epoch)))
     if bidders_ls is None:
         bidders_ls = [DDPG(index=i, 
@@ -153,6 +156,9 @@ def run_experiment(params, epoch, device, bidders_ls=None, reset=True, override_
     return bidders_ls
 
 class ExperimentThread(threading.Thread):
+    """
+    Multi-thread
+    """
     def __init__(self, threadID, maxThread, **kwargs):
       threading.Thread.__init__(self)
       self.threadID = threadID
@@ -172,6 +178,9 @@ class ExperimentThread(threading.Thread):
 
 
 def run_experimentMultiple(params, maxThread, override_ls=None):
+    """
+    Run parallely experiment.
+    """
     # bidders_ls = [DDPG(index=i, 
     #                 value=params["valuations_ls"][i], 
     #                 n_states=params["n_players"], 
@@ -201,6 +210,9 @@ def run_experimentMultiple(params, maxThread, override_ls=None):
     
     # save_result(bidders_ls, dir_name=params["save_to"])
 def fetch_results(bidders_ls):
+    """
+    Fetch actions and rewards from bidder list.
+    """
     import numpy as np
 
     actions_mat = [[ [data[1].item() for data in epoch_data] for epoch_data in bidder.memory.container.values()] for bidder in bidders_ls]
@@ -212,6 +224,9 @@ def fetch_results(bidders_ls):
     return np.swapaxes(np.array(actions_mat), 0, 1), np.swapaxes(np.array(rewards_mat), 0, 1)
 
 def saveMatrix(bidders_ls, save_to):
+    """
+    Auxiliary function to save actions and rewards result.
+    """
     import pandas as pd
     import os
     import json
@@ -229,6 +244,10 @@ def saveMatrix(bidders_ls, save_to):
     json.dump(params, open(os.path.join(save_to, "Params.json"), "w"), sort_keys=True, indent=4)
 
 def saveDDPG(bidders_ls, indexes_ls=[0, 1, 2, 3, 4], experimentName="defaultExperiment"):
+    """
+    Auxiliary function to save bidder and params.
+    """
+
     import pickle
     import os
     import json
