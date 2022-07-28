@@ -8,7 +8,7 @@ from pathlib import Path
 import json
 
 def saveQmat(index):
-    path = '../qDiscrete/' 
+    path = '.' # Please change this path to the location where q matrix is saved. 
     mat = torch.load(path + "averageQmat" + str(index) + ".pt")
     Qvalue = mat[0, 0, 0, 0, 0, ...].numpy()
     np.save(path + "compressedQmat" + str(index), Qvalue)
