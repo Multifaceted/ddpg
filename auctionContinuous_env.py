@@ -2,24 +2,24 @@ import torch
 
 class AuctionContEnv:
     def __init__(self, device, n_bidders=5, clickRates_ls=(20, 10, 5, 2, 0), valuations_ls=(5, 4, 3, 2, 1), bidMin=.2, bidMax=5, seed=None):
-        assert len(clickRates_ls) == n_bidders
-        assert len(valuations_ls) == n_bidders
-        assert bidMin > 0
-        assert bidMax > bidMin
+        assert len(clickRates_ls) == n_bidders # valid input length for click rates
+        assert len(valuations_ls) == n_bidders # valid input length for valuations
+        assert bidMin > 0 # minimal bids acceptable should be greater than 0
+        assert bidMax > bidMin # maxximal bids acceptable hsould be greater than minimal bid acceptable
         
-        self.device = device
-        self.n_bidders = n_bidders
-        self.clickRates_ls = torch.tensor(
+        self.device = device # GPU device
+        self.n_bidders = n_bidders # number of bidder
+        self.clickRates_ls = torch.tensor(  # click rate of bidders
             clickRates_ls, dtype=torch.float32).reshape(-1, ).to(self.device)
         self.valuations_ls = torch.tensor(
             valuations_ls, dtype=torch.float32).reshape(-1, ).to(self.device)
-        self.bidMin = bidMin
-        self.bidMax = bidMax
-        self.clickRates_ls = self.clickRates_ls.sort(descending=True).values
+        self.bidMin = bidMin # min bids acceptable
+        self.bidMax = bidMax # max bids acceptable
+        self.clickRates_ls = self.clickRates_ls.sort(descending=True).values # sort click rates
         
         
-        assert (self.clickRates_ls < 0).sum() == 0
-        assert (self.valuations_ls < 0).sum() == 0
+        assert (self.clickRates_ls < 0).sum() == 0 # click rates should all be non-negative
+        assert (self.valuations_ls < 0).sum() == 0 # valuations should all be non-negative
 
         
         self.reset(seed=seed)
